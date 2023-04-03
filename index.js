@@ -393,7 +393,7 @@ function getCurrentPos(unitType){
 //удар 
 document.addEventListener('keydown', function(event) {
     if (event.code == 'Space') {
-        hitSound(); 
+        hitSoundPerson(); 
         changeEnemyHp();
         
     };
@@ -487,6 +487,7 @@ function changePersonHp(enemyNumber) {
     if (x < 39) {
         if (map[y][x + 1].hp) {
                 map[y][x + 1].hp -= 30;
+
                 if (map[y][x + 1].hp <= 0) {
 
                     map[y][x + 1].type = 'tile';
@@ -496,6 +497,7 @@ function changePersonHp(enemyNumber) {
     if (x > 0) {
         if (map[y][x - 1].hp) {
             map[y][x - 1].hp -= 30;
+
             if (map[y][x - 1].hp <= 0) {
 
                 map[y][x - 1].type = 'tile';
@@ -548,6 +550,7 @@ function randomEnemyAction(){
             if (x < 39) {
                 if (map[y][x + 1].type == 'tileP') { 
                     changePersonHp(i);
+                    hitSoundEnemy();
                 } else {
                     hit++;
                 };
@@ -555,6 +558,7 @@ function randomEnemyAction(){
             if (x > 0) {
                 if (map[y][x - 1].type == 'tileP') { 
                     changePersonHp(i);
+                    hitSoundEnemy();
                 } else {
                     hit++;
                 };
@@ -563,6 +567,7 @@ function randomEnemyAction(){
             if (y < 19) {
                 if (map[y + 1][x].type == 'tileP') { 
                     changePersonHp(i);
+                    hitSoundEnemy();
                 } else {
                     hit++;
                 };
@@ -572,6 +577,7 @@ function randomEnemyAction(){
             if (y > 0) {
                 if (map[y - 1][x].type == 'tileP') { 
                     changePersonHp(i);
+                    hitSoundEnemy();
                 } else {
                     hit++;
                 };
@@ -613,11 +619,18 @@ function uppDmg(y, x) {
     };    
 };
 
-function hitSound() {
+function hitSoundPerson() {
     var audio = new Audio(); 
     audio.src = 'korotkiy-gluhoy-metallicheskiy-stuk.mp3';
     audio.autoplay = true;
 }; 
+
+function hitSoundEnemy() {
+    var audio = new Audio(); 
+    audio.src = 'zvon-jeleznogo-mecha.mp3';
+    audio.autoplay = true;
+}; 
+
 
 
 
