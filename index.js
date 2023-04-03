@@ -463,13 +463,16 @@ function getHeroDmg(y ,x) {
 
 // интервал действия врагов
 function enemyMove() {
-    let enemyQuantity = getCurrentPos('tileE').length; 
+
 
     let timer = setInterval(function() {
         randomEnemyAction(); 
+        let enemyQuantity = getCurrentPos('tileE').length; 
 
-
-        if (enemyQuantity == 0) clearInterval(timer);
+        if (enemyQuantity == 0) {
+            clearInterval(timer);
+            location.reload();
+        };
     }, 1000);
 
 }; 
