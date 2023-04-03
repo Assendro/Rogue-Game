@@ -393,7 +393,9 @@ function getCurrentPos(unitType){
 //удар 
 document.addEventListener('keydown', function(event) {
     if (event.code == 'Space') {
+        hitSound(); 
         changeEnemyHp();
+        
     };
 });
 
@@ -469,8 +471,6 @@ function enemyMove() {
 
         if (enemyQuantity == 0) clearInterval(timer);
     }, 1000);
-
-    results(); 
 
 }; 
 
@@ -613,9 +613,11 @@ function uppDmg(y, x) {
     };    
 };
 
-function results() {
-    
-};
+function hitSound() {
+    var audio = new Audio(); 
+    audio.src = 'korotkiy-gluhoy-metallicheskiy-stuk.mp3';
+    audio.autoplay = true;
+}; 
 
 
 
