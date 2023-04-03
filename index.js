@@ -412,7 +412,7 @@ function changeEnemyHp() {
             map[y][x + 1].hp -= heroDmg;
             map[y][x].dmg = 50; 
 
-            if (map[y][x + 1].hp == 0) {
+            if (map[y][x + 1].hp <= 0) {
 
                 map[y][x + 1].type = 'tile';
             };
@@ -423,7 +423,7 @@ function changeEnemyHp() {
             map[y][x - 1].hp -= heroDmg;
             map[y][x].dmg = 50; 
 
-            if (map[y][x - 1].hp == 0) {
+            if (map[y][x - 1].hp <= 0) {
 
                 map[y][x - 1].type = 'tile';
             };
@@ -434,7 +434,7 @@ function changeEnemyHp() {
             map[y + 1][x].hp -= heroDmg;
             map[y][x].dmg = 50; 
 
-            if (map[y + 1][x].hp == 0) {
+            if (map[y + 1][x].hp <= 0) {
 
                 map[y + 1][x].type = 'tile';
             };
@@ -445,7 +445,7 @@ function changeEnemyHp() {
             map[y - 1][x].hp -= heroDmg;
             map[y][x].dmg = 50; 
 
-            if (map[y - 1][x].hp == 0) {
+            if (map[y - 1][x].hp <= 0) {
 
                 map[y - 1][x].type = 'tile';
             };
@@ -467,6 +467,8 @@ function enemyMove(period) {
         period = 1000;
     } else if (period == 'hard') {
         period = 500;
+    } else if (period == 'Dara') {
+        period = 100;
     } else {
         period = 250;
     };
