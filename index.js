@@ -462,8 +462,14 @@ function getHeroDmg(y ,x) {
 
 
 // интервал действия врагов
-function enemyMove() {
-
+function enemyMove(period) {
+    if (period == 'easy') {
+        period = 1000;
+    } else if (period == 'hard') {
+        period = 500;
+    } else {
+        period = 250;
+    };
 
     let timer = setInterval(function() {
         randomEnemyAction(); 
@@ -473,7 +479,7 @@ function enemyMove() {
             clearInterval(timer);
             location.reload();
         };
-    }, 1000);
+    }, period);
 
 }; 
 
@@ -638,13 +644,15 @@ function hitSoundEnemy() {
 
 
 window.onload = function () {
-createWays();
-createRooms(); 
-createSwordsHealth();
-createPerson(); 
-createEnemies();
-enemyMove();
+    let result = prompt("Введите сложность (easy/hard/insane)", 'easy');
 
-generateMap();
+    createWays();
+    createRooms();
+    createSwordsHealth();
+    createPerson();
+    createEnemies();
+    enemyMove(result);
+
+    generateMap();
 
 };
