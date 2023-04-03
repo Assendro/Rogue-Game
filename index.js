@@ -70,15 +70,15 @@ function createWayX() {
 
         
         for (let j = 0; j < map[0].length; j++) {
-            if (map[y][j].test != 'not') {
+            if (map[y][j].edge != 'not') {
                 map[y][j].type = 'tile';
 
-                map[y][j].test = 'not';
+                map[y][j].edge = 'not';
                 if (map[y - 1]) {
-                    map[y - 1][j].test = 'not';
+                    map[y - 1][j].edge = 'not';
                 };  
                 if (map[y + 1]) {
-                    map[y + 1][j].test = 'not';
+                    map[y + 1][j].edge = 'not';
                 };  
             } else  {
                 j--;
@@ -99,15 +99,15 @@ function createWayY() {
 
         
         for (let j = 0; j < map.length; j++) {
-            if (map[j][x].test2 != 'not') {
+            if (map[j][x].edge2 != 'not') {
                 map[j][x].type = 'tile';
 
-                map[j][x].test2 = 'not';
+                map[j][x].edge2 = 'not';
                 if (map[j][x - 1]) {
-                    map[j][x - 1].test2 = 'not';
+                    map[j][x - 1].edge2 = 'not';
                 };  
                 if (map[j][x + 1]) {
-                    map[j][x + 1].test2 = 'not';
+                    map[j][x + 1].edge2 = 'not';
                 };  
             } else  {
                 j--;
@@ -470,6 +470,8 @@ function enemyMove() {
         if (enemyQuantity == 0) clearInterval(timer);
     }, 1000);
 
+    results(); 
+
 }; 
 
 
@@ -611,7 +613,9 @@ function uppDmg(y, x) {
     };    
 };
 
-
+function results() {
+    
+};
 
 
 
