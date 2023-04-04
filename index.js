@@ -1,3 +1,8 @@
+const dificult = prompt("Введите сложность (easy/hard/insane)", 'easy');
+const mapSizeX = prompt("Введите размер карты по оси X (от 10 до 50)", '40');
+const mapSizeY = prompt("Введите размер карты по оси Y (от 10 до 50)", '20');
+
+
 // Матрица карты
 function createMatrix(x, y) {
     let arr = new Array();
@@ -17,13 +22,15 @@ function createMatrix(x, y) {
 
     return arr;
 }
-let map = createMatrix(20,40);
+let map = createMatrix(mapSizeY,mapSizeX);
 
 
 //Генератор 
 function generateMap() {
     let field = document.querySelector('.field');
     field.innerHTML = '';
+    field.style.width= `${mapSizeX * 30}px`;
+    field.style.height= `${mapSizeY * 30}px`;
     let healthPointValue;
     
 
@@ -32,8 +39,8 @@ function generateMap() {
         for (let x = 0; x < map[0].length; x++) {
         let tile = document.createElement('div');
         
-        let currecntX = x * 50;
-        let currecntY = y * 50;
+        let currecntX = x * 30;
+        let currecntY = y * 30;
 
         tile.className = map[y][x].type;
 
@@ -66,7 +73,7 @@ function createWayX() {
 
     for (let i = 0; i < rowQuantity; i++) {
 
-        let y = Math.floor(Math.random() * 20);
+        let y = Math.floor(Math.random() * mapSizeY);
 
         
         for (let j = 0; j < map[0].length; j++) {
@@ -82,7 +89,7 @@ function createWayX() {
                 };  
             } else  {
                 j--;
-                y = Math.floor(Math.random() * 20);
+                y = Math.floor(Math.random() * mapSizeY);
             };
         };
     };
@@ -95,7 +102,7 @@ function createWayY() {
 
     for (let i = 0; i < columnQuantity; i++) {
 
-        let x = Math.floor(Math.random() * 40);
+        let x = Math.floor(Math.random() * mapSizeX);
 
         
         for (let j = 0; j < map.length; j++) {
@@ -111,7 +118,7 @@ function createWayY() {
                 };  
             } else  {
                 j--;
-                x = Math.floor(Math.random() * 40);
+                x = Math.floor(Math.random() * mapSizeX);
             };
         };
     };
@@ -407,7 +414,7 @@ function changeEnemyHp() {
 
     let heroDmg = getHeroDmg(y ,x);
 
-    if (x < 39) {
+    if (x < mapSizeX - 1) {
         if (map[y][x + 1].hp) {
             map[y][x + 1].hp -= heroDmg;
             map[y][x].dmg = 50; 
@@ -429,7 +436,7 @@ function changeEnemyHp() {
             };
         };    
     };
-    if (y < 19) {
+    if (y < mapSizeY - 1) {
         if (map[y + 1][x].hp) {
             map[y + 1][x].hp -= heroDmg;
             map[y][x].dmg = 50; 
@@ -495,7 +502,7 @@ function changePersonHp(enemyNumber) {
     let x = pos[1]; 
 
 
-    if (x < 39) {
+    if (x < mapSizeX - 1) {
         if (map[y][x + 1].hp) {
                 map[y][x + 1].hp -= 30;
 
@@ -515,7 +522,7 @@ function changePersonHp(enemyNumber) {
             };
         };    
     };
-    if (y < 19) {
+    if (y < mapSizeY - 1) {
         if (map[y + 1][x].hp) {
             map[y + 1][x].hp -= 30;
 
@@ -558,7 +565,7 @@ function randomEnemyAction(){
         let x = pos[1]; 
 
         let hit = 0;
-            if (x < 39) {
+            if (x < mapSizeX - 1) {
                 if (map[y][x + 1].type == 'tileP') { 
                     changePersonHp(i);
                     hitSoundEnemy();
@@ -575,7 +582,7 @@ function randomEnemyAction(){
                 };
                 
             };
-            if (y < 19) {
+            if (y < mapSizeY - 1) {
                 if (map[y + 1][x].type == 'tileP') { 
                     changePersonHp(i);
                     hitSoundEnemy();
@@ -646,14 +653,14 @@ function hitSoundEnemy() {
 
 
 window.onload = function () {
-    let result = prompt("Введите сложность (easy/hard/insane)", 'easy');
+    
 
-    createWays();
+    createWays();   
     createRooms();
     createSwordsHealth();
     createPerson();
     createEnemies();
-    enemyMove(result);
+    enemyMove(dificult);
 
     generateMap();
 
